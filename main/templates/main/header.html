@@ -1,0 +1,59 @@
+<head>
+    {% load static %}
+    <link href="{% static 'tinymce/css/prism.css' %}" rel="stylesheet">
+    <link href="{% static 'css/materialize.css' %}" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+
+<body>
+
+<nav>
+    <div class="nav-wrapper">
+        <a href="{% url 'homepage' %}" class="brand-logo">Tutorials!</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="{% url 'homepage' %}">home</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="#">{{user.username}}</a></li>
+            <li><a href="{% url 'logout' %}">logout</a></li>
+
+            {% else %}
+            <li><a href="{% url 'register' %}">register</a></li>
+            <li><a href="{% url 'login' %}">login</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+{% if messages %}
+{% for message in messages %}
+{% if message.tags == 'success'%}
+<script>M.toast({html: "{{message}}", classes: 'blue rounded',
+                     displayLength:5000});
+</script>
+{% elif message.tags == 'info'%}
+<script>M.toast({html: "{{message}}", classes: 'green rounded',
+                     displayLength:5000});
+</script>
+{% elif message.tags == 'warning'%}
+<script>M.toast({html: "{{message}}", classes: 'orange rounded',
+                     displayLength:5000});
+</script>
+{% elif message.tags == 'error'%}
+<script>M.toast({html: "{{message}}", classes: 'red rounded',
+                     displayLength:5000});
+</script>
+{% endif %}
+{% endfor %}
+{% endif %}
+<div class="container">
+
+    <br>
+    {% block content %}
+    {% endblock %}
+</div>
+
+
+</body>
+
+<script src="{% static 'tinymce/js/prism.js' %}"></script>
