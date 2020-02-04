@@ -6,6 +6,7 @@
     {% for field in form %}
       <p>
         {{ field.label_tag }}<br>
+
         {{ field }}
         {% if field.help_text %}
           <small style="color: grey">{{ field.help_text }}</small>
@@ -15,8 +16,8 @@
         {% endfor %}
       </p>
     {% endfor %}
-    <button class="btn btn-small" type="submit">register</button>
+    <button class="btn btn-small" type="submit">zerejerstuj</button>
 </form>
 
-    If you already have an account, <a href="/login"><strong>login</strong></a> instead.
+    Jeżeli masz już konto, <a href="/login"><strong>zaloguj się</strong></a>.
 {% endblock %}
