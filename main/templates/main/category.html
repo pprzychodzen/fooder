@@ -1,11 +1,10 @@
-{% extends "main/header.html" %}
+{% extends 'main/header.html' %}
 
 {% block content %}
-<h1>empty home2</h1>
+
 {% for instance in object_list %}<br>
 
 {{ instance.name }}
 
 {% endfor %}
-
 {% endblock %}

@@ -3,7 +3,14 @@
 {% block content %}
 <form method="post">
     {% csrf_token %}
-    {{form.as_p}}
+    <p><label class="'active" for="id_username">Nazwa użytkownika:</label>
+        <input id="id_username" name="username" type="text" autofocus="" autocapitalize="none" autocomplete="username"
+        maxlength="150" required="">
+    <br>
+    <p><label class="active" for="id_password">Hasło:</label>
+        <input id="id_password" name="password" type="password" autocomplete="current-password" required="">
+
+
     <button class="btn btn-small" type="submit">login</button>
 </form>
 

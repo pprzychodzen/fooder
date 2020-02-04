@@ -17,7 +17,7 @@ def signup(request):
             messages.success(request, f"new account created: {username}")
             login(request, user)
             messages.info(request, f"you are now logged in as {username}")
-            return redirect('main:homepage')
+            return redirect('homepage')
     else:
         form = SignUpForm()
     return render(request, 'user/register.html', {'form': form})
