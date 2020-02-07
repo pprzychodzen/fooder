@@ -1,6 +1,7 @@
 from django.shortcuts import HttpResponseRedirect
 from django.urls import reverse
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView
 
 from main.forms import RecipeCreateForm
 from main.models import Recipe
@@ -20,9 +21,12 @@ class RecipeDetail(DetailView):
 
 class RecipeCreateView(CreateView):
     model = Recipe
-    template_name = 'main/add_recipe.html'
     form_class = RecipeCreateForm
     success_url = 'home'
+    template_name = 'main/add_recipe.html'
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
 
     def form_valid(self, form):
         form.save()
