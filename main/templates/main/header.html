@@ -1,31 +1,35 @@
 <head>
     {% load static %}
-<!--    <link href="{% static 'tinymce/css/prism.css' %}" rel="stylesheet">-->
     <link href="{% static 'css/materialize.css' %}" rel="stylesheet">
-
+    <link href="{% static 'tinymce/css/prism.css' %}" rel="stylesheet">
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
+<script>
+      tinymce.init({
+        selector: '#mytextarea'
+      });
 
+</script>
 <body>
 
 <nav>
     <div class="nav-wrapper">
         <div style="margin-left: 10px; margin-right: 10px">
-        <a href="{% url 'homepage' %}" class="brand-logo">Fooder!</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            {% if user.is_authenticated %}
-            <li><a href="{% url 'create_recipe' %}">dodaj przepis</a></li>
-            <li><a href="#">{{user.username}}</a></li>
-            <li><a href="{% url 'logout' %}">wyloguj</a></li>
+            <a href="{% url 'homepage' %}" class="brand-logo">Fooder!</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'create_recipe' %}">dodaj przepis</a></li>
+                <li><a href="#">{{user.username}}</a></li>
+                <li><a href="{% url 'logout' %}">wyloguj</a></li>
 
-            {% else %}
-            <li><a href="{% url 'register' %}">zarejestruj</a></li>
-            <li><a href="{% url 'login' %}">zaloguj</a></li>
-            {% endif %}
-        </ul>
-            </div>
+                {% else %}
+                <li><a href="{% url 'register' %}">zarejestruj</a></li>
+                <li><a href="{% url 'login' %}">zaloguj</a></li>
+                {% endif %}
+            </ul>
+        </div>
     </div>
 </nav>
 
@@ -34,18 +38,22 @@
 {% if message.tags == 'success'%}
 <script>M.toast({html: "{{message}}", classes: 'blue rounded',
                      displayLength:5000});
+
 </script>
 {% elif message.tags == 'info'%}
 <script>M.toast({html: "{{message}}", classes: 'green rounded',
                      displayLength:5000});
+
 </script>
 {% elif message.tags == 'warning'%}
 <script>M.toast({html: "{{message}}", classes: 'orange rounded',
                      displayLength:5000});
+
 </script>
 {% elif message.tags == 'error'%}
 <script>M.toast({html: "{{message}}", classes: 'red rounded',
                      displayLength:5000});
+
 </script>
 {% endif %}
 {% endfor %}

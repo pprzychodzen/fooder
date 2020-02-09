@@ -1,12 +1,15 @@
 {% extends 'main/header.html' %}
 {% block content %}
-<form action="." method="POST">
+<head>
 
-{% csrf_token %}
+</head>
+<body>
+<form method="POST">
+    {% csrf_token %}
     {{ form.as_p }}
 
 
-<button type="submit">SUBMIT</button>
+    <button type="submit">SUBMIT</button>
 </form>
-
+</body>
 {% endblock %}

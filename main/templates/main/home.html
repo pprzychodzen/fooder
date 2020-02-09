@@ -8,7 +8,10 @@
     <div class="card">
         <div class="card-body">
             <a href="{% url 'recipe_detail' instance.id %}" class="recipe-detail-link">
-                {{ instance.title }}</a>
+                <h4>{{ instance.title }}</h4><br>
+                <h6>{{ instance.description }}</h6><br>
+                <h6>{{ instance.recipe_category }}</h6>
+            </a>
         </div>
     </div>
 
