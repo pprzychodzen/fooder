@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'user',
     'main',
     'tinymce',
+    'bootstrap4',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +139,5 @@ TINYMCE_DEFAULT_CONFIG = {
     'custom_undo_redo_levels': 10,
     'file_browser_callback' : "myFileBrowser"
 }
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
