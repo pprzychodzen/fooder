@@ -21,31 +21,37 @@
 
 
 
+
+
+
 </script>
 <body>
 
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="{% url 'homepage' %}">fooder</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <a class="navbar-brand" href="{% url 'homepage' %}">fooder</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-    <ul class="navbar-nav ml-auto">
-        {% if user.is_authenticated %}
-      <li class="nav-item active"><a class="nav-link" href="#">{{user.username}}</a></li>
-      <li class="nav-item active"><a class="nav-link" href="{% url 'logout' %}">wyloguj</a></li>
+        <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+            <li class="nav-item active"><a class="nav-link" href="{% url 'create_recipe' %}">dodaj przepis</a></li>
 
-        {% else %}
-      <li class="nav-item active"><a class="nav-link" href="{% url 'register' %}">zarejestruj</a></li>
-      <li class="nav-item active"><a class="nav-link" href="{% url 'login' %}">zaloguj</a>
-      </li>
-        {% endif %}
-    </ul>
+            <li class="nav-item active"><a class="nav-link" href="#">{{user.username}}</a></li>
+            <li class="nav-item active"><a class="nav-link" href="{% url 'logout' %}">wyloguj</a></li>
 
-  </div>
+            {% else %}
+            <li class="nav-item active"><a class="nav-link" href="{% url 'register' %}">zarejestruj</a></li>
+            <li class="nav-item active"><a class="nav-link" href="{% url 'login' %}">zaloguj</a>
+            </li>
+            {% endif %}
+        </ul>
+
+    </div>
 </nav>
 
 <!--OLD MESSAGE SYSTEM FROM MATERIALIZE-->

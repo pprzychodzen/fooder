@@ -6,6 +6,8 @@
     .asteriskField {
     display: none;
 }
+
+
 </style>
 <div class="row justify-content-center">
     <div class="col-6">
@@ -15,10 +17,6 @@
                 <form method="post">
                     {% csrf_token %}
                     {{ form|crispy}}
-                    <div class="invalid-feedback">
-        Please provide a valid state.
-      </div>
-
                     <button type="submit" class="btn btn-primary">zarejestruj</button>
                 </form>
                 Jeżeli masz już konto, <a href="{% url 'login' %}"><strong>zaloguj się</strong></a>.

@@ -2,20 +2,33 @@
 
 {% block content %}
 <h1>przepisy</h1>
-{% for instance in object_list %}<br>
+{% for recipe in object_list %}<br>
 
-<div class="row justify-content-center">
-    <div class="card">
-        <div class="card-body">
-            <a href="{% url 'recipe_detail' instance.id %}" class="recipe-detail-link">
-                <h4>{{ instance.title }}</h4><br>
-                <h6>{{ instance.description }}</h6><br>
-                <h6>{{ instance.recipe_category }}</h6>
-            </a>
+<ul id="recipe-list">
+
+    <div class="row justify-content-left">
+        <div style="width: 80%">
+
+            <div class="card">
+                <div class="card-body" style="flex:">
+                    <a href="{% url 'recipe_detail' pk=recipe.id %}" class="recipe-detail-link"><h2>
+                        {{recipe.title}}</h2></a>
+                    <br>
+
+                    <div style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                        <ul>{{recipe.description}} <span class="greyOut"></span></ul>
+                    </div>
+                    <br>
+                    <ul>{{recipe.recipe_category}} | tagi:
+                        {% for tag in recipe.tag.all %}
+                        {{tag.name}},{% endfor %}</ul>
+
+                </div>
+            </div>
         </div>
     </div>
+</ul>
 
-</div>
 {% endfor %}
 
 {% endblock %}
