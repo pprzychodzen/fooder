@@ -3,8 +3,15 @@
 {% block content %}
 
 
-<p2>{{ recipe.title }}</p2><br>
-<p3>{{ recipe.description }}</p3>
+<h2>{{ recipe.title }}</h2><br>
+{{recipe.recipe_category}} | tagi:
+                        {% for tag in recipe.tag.all %}
+                        {{tag.name}},{% endfor %}
+<br><hr>
+{{ recipe.description }}
+<hr>
+{{ recipe.preparing }}
+
 
 
 {% endblock %}

@@ -1,23 +1,28 @@
 {% extends "main/header.html" %}
-
+{% load crispy_forms_tags %}
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    {% for field in form %}
-      <p>
-        {{ field.label_tag }}<br>
 
-        {{ field }}
-        {% if field.help_text %}
-          <small style="color: grey">{{ field.help_text }}</small>
-        {% endif %}
-        {% for error in field.errors %}
-          <p style="color: red">{{ error }}</p>
-        {% endfor %}
-      </p>
-    {% endfor %}
-    <button class="btn btn-small" type="submit">zerejerstuj</button>
-</form>
+<style>
+    .asteriskField {
+    display: none;
+}
 
-    Jeżeli masz już konto, <a href="/login"><strong>zaloguj się</strong></a>.
+
+</style>
+<div class="row justify-content-center">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <h2>rejestracja</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy}}
+                    <button type="submit" class="btn btn-primary">zarejestruj</button>
+                </form>
+                Jeżeli masz już konto, <a href="{% url 'login' %}"><strong>zaloguj się</strong></a>.
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
