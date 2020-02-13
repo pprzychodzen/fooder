@@ -1,5 +1,6 @@
 <head>
     {% load static %}
+
     <link href="{% static 'tinymce/css/prism.css' %}" rel="stylesheet">
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -21,23 +22,23 @@
 
 
 
-
-
-
 </script>
 <body>
 
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg  navbar sticky-top navbar-light bg-light">
     <a class="navbar-brand" href="{% url 'homepage' %}">fooder</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
+
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
         <ul class="navbar-nav ml-auto">
+
             {% if user.is_authenticated %}
             <li class="nav-item active"><a class="nav-link" href="{% url 'create_recipe' %}">dodaj przepis</a></li>
 

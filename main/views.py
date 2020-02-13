@@ -5,6 +5,7 @@ from django.views.generic.edit import CreateView
 
 from main.forms import RecipeCreateForm
 from main.models import Recipe
+from main.filters import RecipeFilter
 
 
 class RecipeListView(ListView):
@@ -12,6 +13,11 @@ class RecipeListView(ListView):
     template_name = "main/home.html"
     queryset = Recipe.objects.all()
     paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = RecipeFilter(self.request.GET, queryset=self.get_queryset())
+        return context
 
 
 class RecipeDetail(DetailView):

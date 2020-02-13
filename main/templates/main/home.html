@@ -1,8 +1,26 @@
 {% extends "main/header.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-<h1>przepisy</h1>
-{% for recipe in object_list %}<br>
+{% if user.is_authenticated %}
+<strong>Cześć {{user.username}}!</strong>
+<form style="width:300px;float: right">
+    {{filter.form|crispy}}
+    <!--    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+</form>
+<br><br>
+
+{% else %}
+<strong>Cześć gościu!</strong>
+<form style="width:300px;float:right">
+    {{filter.form|crispy}}
+    <!--    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+</form>
+<br><br>
+
+{% endif %}
+<h1>Nasze przepisy</h1>
+{% for recipe in filter.qs %}<br>
 
 <ul id="recipe-list">
 
@@ -21,7 +39,8 @@
                     <br>
                     <ul>{{recipe.recipe_category}} | tagi:
                         {% for tag in recipe.tag.all %}
-                        {{tag.name}},{% endfor %}</ul>
+                        {{tag.name}},{% endfor %}
+                    </ul>
 
                 </div>
             </div>
