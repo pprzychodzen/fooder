@@ -4,6 +4,10 @@
 
 
 <h2>{{ recipe.title }}</h2><br>
+<img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+<!--                    <div class="image" style="margin-right:10px">-->
+<!--                        <div class="image"><img src="{{ image.image.url }}" height="100" id="image"></div>-->
+<!--                    </div>-->
 {{recipe.recipe_category}} | tagi:
                         {% for tag in recipe.tag.all %}
                         {{tag.name}},{% endfor %}

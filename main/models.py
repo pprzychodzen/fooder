@@ -25,6 +25,8 @@ class Recipe(models.Model):
                                         related_name='category')
     tag = models.ManyToManyField(Tag, blank=True, related_name='recipe_tags')
 
+    image = models.ImageField(upload_to='media', blank=True)
+
     def get_absolute_url(self):
         return reverse('recipe:detail', kwargs={'id': self.id})
 

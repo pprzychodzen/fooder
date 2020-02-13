@@ -6,9 +6,11 @@ from user.models import User
 
 
 class RecipeCreateForm(forms.ModelForm):
+    image = forms.ImageField()
+
     class Meta:
         model = Recipe
-        fields = ['title', 'recipe_category', 'description', 'preparing', 'tag']
+        fields = ['title', 'recipe_category', 'description', 'preparing', 'tag', 'image']
         widgets = {
             'description': TinyMCE(),
         }

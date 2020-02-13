@@ -17,6 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 from user.views import login_request, logout_request, signup
 from main.views import RecipeListView, RecipeDetail, RecipeCreateView
+from django.conf.urls.static import static
+from django.conf import settings
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,3 +34,5 @@ urlpatterns = [
     path('<int:pk>/', RecipeDetail.as_view(), name='recipe_detail'),
     path('create/', RecipeCreateView.as_view(), name='create_recipe'),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
