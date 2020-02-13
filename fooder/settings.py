@@ -14,7 +14,9 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+NEW_BASE_DIR = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'fooder/main/'
+)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -119,7 +121,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_ROOT = ''
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(NEW_BASE_DIR, '')
+
 
 TINYMCE_JS_URL = os.path.join(STATIC_URL, "js/tinymce/tinymce.min.js")
 TINYMCE_JS_ROOT = os.path.join(STATIC_URL, "js/tinymce")
