@@ -16,10 +16,10 @@
                 <form method="post">
                     {% csrf_token %}
                     {{ form|crispy }}
-                    <button type="submit" class="btn btn-primary">zaloguj</button>
-                    <a href="#" class="btn btn-link">Przypomnieć hasło?</a>
+                    <button type="submit" class="btn btn-secondary" >zaloguj</button>
+                    <a href="#" class="link" style="margin- left 100px">Przypomnieć hasło?</a>
                 </form>
-                Jeżeli nie masz konta, <a href="/register"><strong>zarejestruj</strong></a> się.
+                Jeżeli nie masz konta, <a href="/register" class="link"><strong>zarejestruj</strong></a> się.
 
 
             </div>

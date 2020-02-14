@@ -3,14 +3,14 @@
 
 {% block content %}
 <style>
-    .recipe-detail-link {
-    color: black;
-    }
+.description {
+    line-height: 1.5em;
+    height: 4.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
-    .recipe-detail-link:hover {
-    color: grey;
-    text-decoration: none;
-    }
+    width: 100%;
+}
 
 </style>
 {% if user.is_authenticated %}
@@ -39,22 +39,22 @@
         <div style="width: 80%">
 
             <div class="card">
-                <div class="card-body" style="flex:">
-                    <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}" height="160" width="160"
+                <div class="card-body">
+                    <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}" height="168" width="168"
                          style="float: left; margin-right: 10px, margin-bottom: 5px; border: solid black 1px; padding: 2px">
                     <div style="margin-left: 180px">
                     <a href="{% url 'recipe_detail' pk=recipe.id %}" class="recipe-detail-link"><h2>
                         {{recipe.title}}</h2></a>
-                    <br>
 
-                    <div style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
-                        <ul>{{recipe.description}} <span class="greyOut"></span></ul>
-                    </div>
-                    <br>
-                    <ul>Kategoria: {{recipe.recipe_category}} | tagi:
+
+                    <div class="description" >
+                        {{recipe.description}}<span class="greyOut"></span>
+                    </div><br>
+                    <div style="float: bottom">
+                    Kategoria: {{recipe.recipe_category}} | tagi:
                         {% for tag in recipe.tag.all %}
                         {{tag.name}},{% endfor %}
-                    </ul>
+</div>
                     </div>
                 </div>
             </div>
