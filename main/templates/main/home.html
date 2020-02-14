@@ -2,11 +2,21 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+<style>
+.description {
+    line-height: 1.5em;
+    height: 4.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    width: 100%;
+}
+
+</style>
 {% if user.is_authenticated %}
 <strong>Cześć {{user.username}}!</strong>
 <form style="width:300px;float: right">
     {{filter.form|crispy}}
-    <!--    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
 </form>
 <br><br>
 
@@ -14,7 +24,6 @@
 <strong>Cześć gościu!</strong>
 <form style="width:300px;float:right">
     {{filter.form|crispy}}
-    <!--    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
 </form>
 <br><br>
 
@@ -28,20 +37,23 @@
         <div style="width: 80%">
 
             <div class="card">
-                <div class="card-body" style="flex:">
+                <div class="card-body">
+                    <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}" height="168" width="168"
+                         style="float: left; margin-right: 10px, margin-bottom: 5px; border: solid black 1px; padding: 2px">
+                    <div style="margin-left: 180px">
                     <a href="{% url 'recipe_detail' pk=recipe.id %}" class="recipe-detail-link"><h2>
                         {{recipe.title}}</h2></a>
-                    <br>
 
-                    <div style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
-                        <ul>{{recipe.description}} <span class="greyOut"></span></ul>
-                    </div>
-                    <br>
-                    <ul>{{recipe.recipe_category}} | tagi:
+
+                    <div class="description" >
+                        {{recipe.description}}<span class="greyOut"></span>
+                    </div><br>
+                    <div style="float: bottom">
+                    Kategoria: {{recipe.recipe_category}} | tagi:
                         {% for tag in recipe.tag.all %}
                         {{tag.name}},{% endfor %}
-                    </ul>
-
+</div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -8,6 +8,8 @@
 }
 
 
+
+
 </style>
 <div class="row justify-content-center">
     <div class="col-6">
@@ -17,9 +19,11 @@
                 <form method="post">
                     {% csrf_token %}
                     {{ form|crispy}}
-                    <button type="submit" class="btn btn-primary">zarejestruj</button>
+                    <button type="submit" class="btn btn-secondary">zarejestruj</button>
+
                 </form>
-                Jeżeli masz już konto, <a href="{% url 'login' %}"><strong>zaloguj się</strong></a>.
+                Jeżeli masz już konto, <a href="{% url 'login' %}" class="link"><strong>zaloguj się</strong></a>.
+
             </div>
         </div>
     </div>
