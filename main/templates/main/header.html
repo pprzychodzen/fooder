@@ -1,5 +1,6 @@
 <head>
     {% load static %}
+    {% load crispy_forms_tags %}
 
     <link href="{% static 'tinymce/css/prism.css' %}" rel="stylesheet">
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
@@ -19,8 +20,6 @@
       tinymce.init({
         selector: '#mytextarea'
       });
-
-
 
 
 </script>
@@ -50,6 +49,8 @@
     text-decoration: none;
     }
 
+
+
 </style>
 <body>
 
@@ -62,9 +63,7 @@
     </button>
 
 
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
         <ul class="navbar-nav ml-auto">
 
             {% if user.is_authenticated %}
