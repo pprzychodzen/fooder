@@ -1,0 +1,45 @@
+{% extends 'main/header.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<form method='get' style="width:300px;float:right">
+    {{filter.form|crispy}}
+</form>
+
+{% for recipe in filter.qs %}
+
+<ul id="recipe-list">
+
+    <div class="row justify-content-left">
+        <div style="width: 80%">
+
+            <div class="card">
+                <div class="card-body">
+                    <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}" height="168" width="168"
+                         style="float: left; margin-right: 10px, margin-bottom: 5px; border: solid black 1px; padding: 2px">
+                    <div style="margin-left: 180px">
+                    <a href="{% url 'recipe_detail' pk=recipe.id %}" class="recipe-detail-link"><h2>
+                        {{recipe.title}}</h2></a>
+
+
+                    <div class="description" >
+                        {{recipe.description}}<span class="greyOut"></span>
+                    </div><br>
+                    <div style="float: bottom">
+                    Kategoria: {{recipe.recipe_category}} | tagi:
+                        {% for tag in recipe.tag.all %}
+                        {{tag.name}},{% endfor %}
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ul>
+
+{% endfor %}
+
+
+
+{% endblock %}
