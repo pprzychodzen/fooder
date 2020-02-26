@@ -3,20 +3,44 @@
 
 {% block content %}
 
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}" class="img-fluid"
+                 style="float: left; margin-right: 10px, margin-bottom: 5px; border: solid black 1px; padding: 2px">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col"><br>
+            <h2>{{ recipe.title }}</h2><br>
+            {{recipe.recipe_category}} <br> tagi:
+            {% for tag in recipe.tag.all %}
+            {{tag.name}},{% endfor %}<br>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <h3><strong>Składniki:</strong></h3>
+            <ul>
+                <li>papryka</li>
+                <li>ogórek</li>
+                <li>masło</li>
+                <li>pieprz</li>
 
-<h2>{{ recipe.title }}</h2><br>
-<img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
-<!--                    <div class="image" style="margin-right:10px">-->
-<!--                        <div class="image"><img src="{{ image.image.url }}" height="100" id="image"></div>-->
-<!--                    </div>-->
-{{recipe.recipe_category}} | tagi:
-                        {% for tag in recipe.tag.all %}
-                        {{tag.name}},{% endfor %}
-<br><hr>
-{{ recipe.description }}
-<hr>
-{{ recipe.preparing }}
+            </ul>
+        </div>
+        <div class="col">
+            <h3><strong>Opis:</strong></h3>
 
+            {{ recipe.description }}
+            <hr>
+            <h3><strong>Przygotowanie:</strong></h3>
+
+            {{ recipe.preparing }}
+        </div>
+    </div>
+</div>
 
 
 {% endblock %}
