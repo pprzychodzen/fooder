@@ -23,7 +23,7 @@ from user.views import login_request, logout_request, signup
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('tinycme/', include('tinymce.urls')),
+    path('tinymce/', include('tinymce.urls')),
     # user
     path('logout', logout_request, name="logout"),
     path('login', login_request, name='login'),
