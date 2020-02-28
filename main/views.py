@@ -1,10 +1,10 @@
 from django.shortcuts import HttpResponseRedirect, render
 from django.urls import reverse
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, FormMixin
 
-from main.forms import RecipeCreateForm
-from main.models import Recipe
+from main.forms import RecipeCreateForm, CommentForm
+from main.models import Recipe, Comment
 from main.filters import RecipeFilter
 
 
@@ -27,9 +27,24 @@ class RecipeListView(ListView):
         return context
 
 
-class RecipeDetail(DetailView):
+class RecipeDetail(DetailView, FormMixin):
     model = Recipe
     context_object_name = "recipe"
+    template_name = 'main/recipe_detail.html'
+    form_class = CommentForm
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid() and len(form.instance.text) > 0:
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.recipe = self.get_object()
+        form.save()
+        return HttpResponseRedirect(self.request.path_info)
 
 
 class RecipeCreateView(CreateView):

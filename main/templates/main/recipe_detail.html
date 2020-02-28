@@ -42,5 +42,29 @@
     </div>
 </div>
 
+<h2>Comments</h2>
+
+{% for comment in recipe.comments.all %}
+<div class="row justify-content-left" style="margin-left: 30px">
+    <div class="comment">
+        <div class="date smalltext">{{ comment.created_date }}</div>
+        <strong>{{ comment.author }}</strong>
+        <p>{{ comment.text|linebreaks }}</p>
+        <hr>
+    </div>
+</div>
+{% empty %}
+<p>No comments here yet.</p>
+{% endfor %}
+<p>Add new comment</p>
+<form method="POST" class="post-form" style="width:400px;">
+    {% csrf_token %}
+    {{ form|crispy }}
+    {% if user.is_authenticated %}
+    <button type="submit" class="save btn btn-primary btn-sm">Add</button>
+    {% else %}
+    {% endif %}
+
+</form>
 
 {% endblock %}
