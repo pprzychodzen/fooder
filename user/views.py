@@ -30,6 +30,7 @@ def logout_request(request):
 
 
 def login_request(request):
+
     if request.method == "POST":
         form = AuthenticationForm(request, request.POST)
         if form.is_valid():
@@ -39,7 +40,10 @@ def login_request(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"you are now logged in as {username}")
-                return redirect("homepage")
+                if 'next' in request.POST:
+                    return redirect(request.POST.get('next'))
+                else:
+                    return redirect("homepage")
             else:
                 messages.error(request, "invalid username or password")
         else:

@@ -41,7 +41,8 @@
         </div>
     </div>
 </div>
-
+<br><br>
+<hr>
 <h2>Comments</h2>
 
 {% for comment in recipe.comments.all %}
@@ -56,12 +57,13 @@
 {% empty %}
 <p>No comments here yet.</p>
 {% endfor %}
+{% if user.is_authenticated %}
 <p>Add new comment</p>
 <form method="POST" class="post-form" style="width:400px;">
     {% csrf_token %}
     {{ form|crispy }}
-    {% if user.is_authenticated %}
-    <button type="submit" class="save btn btn-primary btn-sm">Add</button>
+
+    <button type="submit" class="btn btn-secondary">Add</button>
     {% else %}
     {% endif %}
 
