@@ -1,5 +1,5 @@
 from django import forms
-from main.models import Recipe
+from main.models import Recipe, Comment
 from tinymce.widgets import TinyMCE
 from django.db import models
 from user.models import User
@@ -18,6 +18,15 @@ class RecipeCreateForm(forms.ModelForm):
     class Media:
         js = ('/media/tinymce/jscripts/tiny_mce/tiny_mce.js',
               '',)
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['text']
+        labels = {'text': ''}
+
+
     #
     # def __init__(self, *args, **kwargs):
     #     self.User = kwargs.pop('user')
