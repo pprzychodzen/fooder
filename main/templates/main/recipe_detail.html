@@ -2,7 +2,13 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+<style>
+    #id_text.textarea.form-control {
+    width:400px;
+    height: 100px;
+    }
 
+</style>
 <div class="container">
     <div class="row">
         <div class="col">
@@ -44,29 +50,50 @@
 <br><br>
 <hr>
 <h2>Comments</h2>
+<div class="card">
+    {% for comment in recipe.comments.all %}
+    <div class="row justify-content-left" style="margin-left: 30px; margin-top: 10px">
+        <div class="comment">
 
-{% for comment in recipe.comments.all %}
-<div class="row justify-content-left" style="margin-left: 30px">
-    <div class="comment">
-        <div class="date smalltext">{{ comment.created_date }}</div>
-        <strong>{{ comment.author }}</strong>
-        <p>{{ comment.text|linebreaks }}</p>
-        <hr>
+            <font size="2">
+                <div class="date smalltext">{{user.profile.avatar.url}} <strong>{{ comment.author }}</strong></div>
+                <div class="date smalltext">{{ comment.created_date|date:'Y-m-d H:i' }}</div>
+            </font>
+
+            {% if comment.text|length > 120 %}
+
+            <div style="width: 90%">
+                <hr>
+                <p>{{ comment.text|linebreaks }}</p>
+                <hr>
+            </div>
+            {% else %}
+            <hr>
+            <p>{{ comment.text|linebreaks }}</p>
+            <hr>
+            {% endif %}
+
+
+            <br>
+        </div>
+    </div>
+    {% empty %}
+    <p>Brak komentarzy.</p>
+    {% endfor %}
+    {% if user.is_authenticated %}
+    <div style="margin-left: 15px">
+        <p>Dodaj komentarz</p>
+        <form method="POST" class="post-form">
+            {% csrf_token %}
+            {{ form|crispy }}
+
+            <button type="submit" class="btn btn-secondary">Add</button>
+            <br>
+            {% else %}
+            {% endif %}
+
+        </form>
     </div>
 </div>
-{% empty %}
-<p>No comments here yet.</p>
-{% endfor %}
-{% if user.is_authenticated %}
-<p>Add new comment</p>
-<form method="POST" class="post-form" style="width:400px;">
-    {% csrf_token %}
-    {{ form|crispy }}
-
-    <button type="submit" class="btn btn-secondary">Add</button>
-    {% else %}
-    {% endif %}
-
-</form>
 
 {% endblock %}

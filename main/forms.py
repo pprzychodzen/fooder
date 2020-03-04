@@ -25,7 +25,9 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ['text']
         labels = {'text': ''}
-
+        widgets = {
+            'text': forms.Textarea(attrs={'cols': "10", 'rows': '10'}),
+        }
 
     #
     # def __init__(self, *args, **kwargs):

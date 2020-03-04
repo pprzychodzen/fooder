@@ -2,8 +2,9 @@ from django.contrib import messages
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
-
-from user.forms import SignUpForm
+from django.views.generic.edit import UpdateView
+from user.models import UserProfile
+from user.forms import SignUpForm, UserProfileForm
 
 
 def signup(request):
@@ -30,7 +31,6 @@ def logout_request(request):
 
 
 def login_request(request):
-
     if request.method == "POST":
         form = AuthenticationForm(request, request.POST)
         if form.is_valid():
@@ -52,3 +52,14 @@ def login_request(request):
     return render(request,
                   "user/login.html",
                   {"form": form})
+
+
+class UserProfileView(UpdateView):
+    model = UserProfile
+    form_class = UserProfileForm
+    success_url = "/"
+    template_name = "user/user_profile.html"
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(user=self.request.user)

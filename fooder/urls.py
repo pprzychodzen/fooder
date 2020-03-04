@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from main.views import RecipeListView, RecipeDetail, RecipeCreateView
-from user.views import login_request, logout_request, signup
+from user.views import login_request, logout_request, signup, UserProfileView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,6 +28,7 @@ urlpatterns = [
     path('logout', logout_request, name="logout"),
     path('login', login_request, name='login'),
     path('register/', signup, name='register'),
+    path('user_profile/<int:pk>/', UserProfileView.as_view(), name='user_profile'),
 
     # main
     path('', RecipeListView.as_view(), name='homepage'),

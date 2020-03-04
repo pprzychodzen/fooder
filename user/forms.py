@@ -30,8 +30,10 @@ class SignUpForm(UserCreationForm):
             'password2': 'powtórz hasło'
         }
 
-# class UserProfileForm(forms.ModelForm):
-#     class Meta:
-#         model = UserProfile
-#         # fields = ('avatar',)
-#         # labels = {'avatar': 'Awatar'}
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('avatar', 'about_me')
+        labels = {'avatar': 'Avatar',
+                  'about_me': 'Więcej o mnie'}
