@@ -9,7 +9,7 @@ User._meta.get_field('email')._unique = True
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name='profile')
 
-    avatar = models.ImageField(upload_to='media', blank=True, default='default-100.jpg')
+    avatar = models.ImageField(upload_to='media/avatar', blank=True, default='media/avatar/default-100.jpg')
     about_me = models.CharField(max_length=512, blank=True)
 
     def __str__(self):

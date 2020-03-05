@@ -8,6 +8,7 @@
     height: 100px;
     }
 
+
 </style>
 <div class="container">
     <div class="row">
@@ -56,7 +57,9 @@
         <div class="comment">
 
             <font size="2">
-                <div class="date smalltext">{{user.profile.avatar.url}} <strong>{{ comment.author }}</strong></div>
+
+                <div class="date smalltext"><img src="{{ comment.author.profile.avatar.url }}" height="40" width="40"
+                                                 id="avatar"> <strong>{{ comment.author }}</strong></div>
                 <div class="date smalltext">{{ comment.created_date|date:'Y-m-d H:i' }}</div>
             </font>
 
