@@ -21,6 +21,8 @@
       tinymce.init({
         selector: '#mytextarea'
       });
+    $( document ).ready(function() {
+
 
 
 </script>
@@ -68,10 +70,11 @@
         <ul class="navbar-nav ml-auto">
 
             {% if user.is_authenticated %}
-            <li class="nav-item active"><a class="nav-link" href="{% url 'create_recipe' %}">dodaj przepis</a></li>
+            <!--            <li class="nav-item active"><a class="nav-link" href="{% url 'create_recipe' %}">dodaj przepis</a></li>-->
             <li class="nav-item active"><a class="nav-link" href="{% url 'change_password' %}">zmien haslo</a></li>
 
-            <li class="nav-item active"><a class="nav-link" href="{% url 'user_profile' user.pk %}">{{user.username}}</a></li>
+            <li class="nav-item active"><a class="nav-link"
+                                           href="{% url 'user_profile' user.pk %}">{{user.username}}</a></li>
             <li class="nav-item active"><a class="nav-link" href="{% url 'logout' %}">wyloguj</a></li>
 
             {% else %}
@@ -83,31 +86,23 @@
 
     </div>
 </nav>
+{% if messages %}
+<div class="row justify-content-center">
+    <div class="col-sm-offset-2 justify-content-center">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            <p>{{ message }}</p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 
-<!--OLD MESSAGE SYSTEM FROM MATERIALIZE-->
-<!--{% if messages %}-->
-<!--{% for message in messages %}-->
-<!--{% if message.tags == 'success'%}-->
-<!--<script>M.toast({html: "{{message}}", classes: 'blue rounded',-->
-<!--                     displayLength:5000});-->
-<!--</script>-->
-<!--{% elif message.tags == 'info'%}-->
-<!--<script>M.toast({html: "{{message}}", classes: 'green rounded',-->
-<!--                     displayLength:5000});-->
-<!--</script>-->
-<!--{% elif message.tags == 'warning'%}-->
-<!--<script>M.toast({html: "{{message}}", classes: 'orange rounded',-->
-<!--                     displayLength:5000});-->
-<!--</script>-->
-<!--{% elif message.tags == 'error'%}-->
-<!--<script>M.toast({html: "{{message}}", classes: 'red rounded',-->
-<!--                     displayLength:5000});-->
-<!--</script>-->
-<!--{% endif %}-->
-<!--{% endfor %}-->
-<!--{% endif %}-->
+{% endif %}
+
 <div class="container">
-
     <br>
     {% block content %}
     {% endblock %}
