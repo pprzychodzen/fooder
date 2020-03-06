@@ -4,7 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.shortcuts import render, redirect
 from django.views.generic.edit import UpdateView
 from user.models import UserProfile
-from user.forms import SignUpForm, UserProfileForm
+from user.forms import SignUpForm, UserProfileForm, ChangePassword
 
 
 def signup(request):
@@ -15,9 +15,9 @@ def signup(request):
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
-            messages.success(request, f"new account created: {username}")
+            messages.success(request, f"Nowe konto założone: {username}")
             login(request, user)
-            messages.info(request, f"you are now logged in as {username}")
+            messages.info(request, f"Jesteś zalogowany/a jako {username}")
             return redirect('homepage')
     else:
         form = SignUpForm()
@@ -26,7 +26,7 @@ def signup(request):
 
 def logout_request(request):
     logout(request)
-    messages.info(request, "logged out successfully!")
+    messages.info(request, "Wylogowano!")
     return redirect("homepage")
 
 
@@ -39,15 +39,17 @@ def login_request(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.info(request, f"you are now logged in as {username}")
+                messages.success(request, f"Jesteś zalogowany/a jako {username}")
                 if 'next' in request.POST:
                     return redirect(request.POST.get('next'))
+                if 'login?next' in request.POST:
+                    return redirect('homepage')
                 else:
                     return redirect("homepage")
             else:
-                messages.error(request, "invalid username or password")
+                messages.error(request, "Błędny login lub hasło")
         else:
-            messages.error(request, "invalid username or password")
+            messages.error(request, "Błędny login lub hasło")
     form = AuthenticationForm()
     return render(request,
                   "user/login.html",
@@ -67,14 +69,14 @@ class UserProfileView(UpdateView):
 
 def change_password(request):
     if request.method == 'POST':
-        form = PasswordChangeForm(request.user, request.POST)
+        form = ChangePassword(request.user, request.POST)
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)
-            messages.success(request, 'Your password was successfully updated!')
+            messages.success(request, 'Hasło zostało zmienione!')
             return redirect('/')
         else:
-            messages.error(request, 'Please correct the error below.')
+            messages.error(request, 'Proszę poprawić błędy!')
     else:
-        form = PasswordChangeForm(request.user)
+        form = ChangePassword(request.user)
     return render(request, 'user/change_password.html', {'form': form})

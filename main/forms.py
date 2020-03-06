@@ -1,8 +1,7 @@
 from django import forms
-from main.models import Recipe, Comment
 from tinymce.widgets import TinyMCE
-from django.db import models
-from user.models import User
+
+from main.models import Recipe, Comment
 
 
 class RecipeCreateForm(forms.ModelForm):
@@ -28,14 +27,3 @@ class CommentForm(forms.ModelForm):
         widgets = {
             'text': forms.Textarea(attrs={'cols': "10", 'rows': '10'}),
         }
-
-    #
-    # def __init__(self, *args, **kwargs):
-    #     self.User = kwargs.pop('user')
-    #     super(RecipeCreateForm, self).__init__(*args, **kwargs)
-    # #
-    # def clean_title(self):
-    #     title = self.cleaned_data['title']
-    #     if Recipe.objects.filter(user=self.user, title=title).exists():
-    #         raise forms.ValidationError("You have already written a book with same title.")
-    #     return title

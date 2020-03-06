@@ -1,8 +1,8 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from user.models import UserProfile
-
+from django.utils.translation import ugettext_lazy as _
 
 class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=False, help_text='niewymagane', label='Imię')
@@ -37,3 +37,23 @@ class UserProfileForm(forms.ModelForm):
         fields = ('avatar', 'about_me')
         labels = {'avatar': 'Avatar',
                   'about_me': 'Więcej o mnie'}
+
+
+class ChangePassword(PasswordChangeForm):
+    old_password = forms.CharField(
+        label=_("Stare hasło"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', 'autofocus': True}),
+    )
+    new_password1 = forms.CharField(
+        label=_("Nowe hasło"),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
+        strip=False,
+        help_text='',
+    )
+    new_password2 = forms.CharField(
+        label=_("Powtórzone nowe hasło"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
+    )
+
