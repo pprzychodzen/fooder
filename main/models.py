@@ -19,6 +19,27 @@ class Tag(models.Model):
         return self.name
 
 
+class Sauce(models.Model):
+    name = models.CharField(max_length=60)
+
+    def __str__(self):
+        return self.name
+
+
+class Serving(models.Model):
+    name = models.CharField(max_length=60)
+
+    def __str__(self):
+        return self.name
+
+
+class Ingredients(models.Model):
+    name = models.CharField(max_length=60)
+
+    def __str__(self):
+        return self.name
+
+
 class Recipe(models.Model):
     title = models.CharField(max_length=200)
     description = tinymce_models.HTMLField()
@@ -26,6 +47,9 @@ class Recipe(models.Model):
     recipe_category = models.ForeignKey(Category, default=None, blank=False, on_delete=models.CASCADE,
                                         related_name='category')
     tag = models.ManyToManyField(Tag, blank=True, related_name='recipe_tags')
+    ingredients = models.ManyToManyField(Ingredients, blank=True, related_name='recipe_ingredients')
+    sauce = models.ManyToManyField(Sauce, blank=True, related_name='recipe_sauce')
+    serving = models.ManyToManyField(Serving, blank=True, related_name='recipe_serving')
 
     image = models.ImageField(upload_to='media', blank=True)
 
@@ -54,6 +78,3 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
-
-
-

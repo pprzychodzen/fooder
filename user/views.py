@@ -4,7 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.shortcuts import render, redirect
 from django.views.generic.edit import UpdateView
 from user.models import UserProfile
-from user.forms import SignUpForm, UserProfileForm, ChangePassword
+from user.forms import SignUpForm, UserProfileForm, ChangePassword, MyAuthenticationForm
 
 
 def signup(request):
@@ -32,7 +32,7 @@ def logout_request(request):
 
 def login_request(request):
     if request.method == "POST":
-        form = AuthenticationForm(request, request.POST)
+        form = MyAuthenticationForm(request, request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
@@ -50,7 +50,7 @@ def login_request(request):
                 messages.error(request, "Błędny login lub hasło")
         else:
             messages.error(request, "Błędny login lub hasło")
-    form = AuthenticationForm()
+    form = MyAuthenticationForm()
     return render(request,
                   "user/login.html",
                   {"form": form})

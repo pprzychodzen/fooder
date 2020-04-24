@@ -8,6 +8,16 @@
     height: 100px;
     }
 
+    .img-fluid {
+    object-fit: cover;
+    width: 1200px;
+    height: 337px;
+    }
+
+
+
+
+
 
 </style>
 <div class="container">
@@ -30,12 +40,27 @@
         <div class="col-md-4">
             <h3><strong>Składniki:</strong></h3>
             <ul>
-                <li>papryka</li>
-                <li>ogórek</li>
-                <li>masło</li>
-                <li>pieprz</li>
-
+                {% for ingredients in recipe.ingredients.all %}
+                <li>{{ingredients.name}}</li>
+                {% endfor %}
             </ul>
+            {% if recipe.sauce %}
+            <h3><strong>Sos:</strong></h3>
+            <ul>
+                {% for sauce in recipe.sauce.all %}
+                <li>{{sauce.name}}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% if recipe.serving %}
+            <h3><strong>Dodatki:</strong></h3>
+            <ul>
+
+                {% for serving in recipe.serving.all %}
+                <li>{{serving.name}}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
         </div>
         <div class="col">
             <h3><strong>Opis:</strong></h3>
@@ -55,16 +80,12 @@
     {% for comment in recipe.comments.all %}
     <div class="row justify-content-left" style="margin-left: 30px; margin-top: 10px">
         <div class="comment">
-
             <font size="2">
-
                 <div class="date smalltext"><img src="{{ comment.author.profile.avatar.url }}" height="40" width="40"
                                                  id="avatar"> <strong>{{ comment.author }}</strong></div>
                 <div class="date smalltext">{{ comment.created_date|date:'Y-m-d H:i' }}</div>
             </font>
-
             {% if comment.text|length > 120 %}
-
             <div style="width: 90%">
                 <hr>
                 <p>{{ comment.text|linebreaks }}</p>
@@ -75,22 +96,20 @@
             <p>{{ comment.text|linebreaks }}</p>
             <hr>
             {% endif %}
-
-
             <br>
         </div>
     </div>
     {% empty %}
-    <p>Brak komentarzy.</p>
+    <p style="margin-left: 15px; margin-top: 30px; font-size:20px; font-weight: bold; margin-bottom: 50px">Brak komentarzy.</p>
     {% endfor %}
     {% if user.is_authenticated %}
     <div style="margin-left: 15px">
-        <p>Dodaj komentarz</p>
+        <p>Napisz komentarz</p>
         <form method="POST" class="post-form">
             {% csrf_token %}
             {{ form|crispy }}
 
-            <button type="submit" class="btn btn-secondary">Add</button>
+            <button type="submit" class="btn btn-secondary">dodaj</button>
             <br>
             {% else %}
             {% endif %}
