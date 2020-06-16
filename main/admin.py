@@ -5,6 +5,15 @@ from django.db import models
 
 
 class RecipeAdmin(admin.ModelAdmin):
+    fields = ["title",
+              "recipe_category",
+              "description",
+              "preparing",
+              "tag",
+              "ingredients",
+              "sauce",
+              "serving",
+              "image"]
     formfield_overrides = {
         models.TextField: {'widget': TinyMCE()},
 

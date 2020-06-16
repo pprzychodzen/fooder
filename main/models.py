@@ -42,8 +42,8 @@ class Ingredients(models.Model):
 
 class Recipe(models.Model):
     title = models.CharField(max_length=200)
-    description = tinymce_models.HTMLField()
-    preparing = models.TextField(default="pusty")
+    description = models.TextField()
+    preparing = models.TextField(default="puste przygotowanie")
     recipe_category = models.ForeignKey(Category, default=None, blank=False, on_delete=models.CASCADE,
                                         related_name='category')
     tag = models.ManyToManyField(Tag, blank=True, related_name='recipe_tags')
