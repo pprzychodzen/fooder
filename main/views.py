@@ -2,16 +2,36 @@ from django.shortcuts import HttpResponseRedirect, render
 from django.urls import reverse
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, FormMixin
+from django.db.models import Q
 
 from main.forms import RecipeCreateForm, CommentForm
-from main.models import Recipe, Comment
+from main.models import Recipe, Comment, IngredientsType
 from main.filters import RecipeFilter
 
 
-def search(request):
-    recipe_list = Recipe.objects.all()
-    recipe_filter = RecipeFilter(request.GET, queryset=recipe_list)
-    return render(request, 'main/search.html', {'filter': recipe_filter})
+class RecipeSearchList(ListView):
+    model = Recipe
+    template_name = 'main/search.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = RecipeFilter(self.request.GET, queryset=self.get_queryset())
+        return context
+
+
+
+# def search_recipe(request):
+#     ing1 = IngredientsType.object.get(type='Ingredient1')
+#     qs = Recipe.objects.all()
+#     ingredients_list = IngredientsType.objects.all()
+#     search_result = request.GET.get('ingredient_type')
+#
+#     qs = qs.filter(search__icontains=search_result)
+#     context = {
+#         'ingredients_type': ingredients_list,
+#         'queryset': qs
+#     }
+#     return render(request, 'main/search.html', context)
 
 
 class RecipeListView(ListView):

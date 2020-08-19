@@ -33,6 +33,13 @@ class Serving(models.Model):
         return self.name
 
 
+class IngredientsType(models.Model):
+    type = models.CharField(max_length=60, blank=True)
+
+    def __str__(self):
+        return self.type
+
+
 class Ingredients(models.Model):
     name = models.CharField(max_length=60)
 
@@ -42,15 +49,15 @@ class Ingredients(models.Model):
 
 class Recipe(models.Model):
     title = models.CharField(max_length=200)
-    description = tinymce_models.HTMLField()
-    preparing = models.TextField(default="pusty")
+    description = models.TextField()
+    preparing = models.TextField(default="puste przygotowanie")
     recipe_category = models.ForeignKey(Category, default=None, blank=False, on_delete=models.CASCADE,
                                         related_name='category')
     tag = models.ManyToManyField(Tag, blank=True, related_name='recipe_tags')
     ingredients = models.ManyToManyField(Ingredients, blank=True, related_name='recipe_ingredients')
     sauce = models.ManyToManyField(Sauce, blank=True, related_name='recipe_sauce')
     serving = models.ManyToManyField(Serving, blank=True, related_name='recipe_serving')
-
+    ingredients_type = models.ManyToManyField(IngredientsType, related_name='ingredients_type', blank=True)
     image = models.ImageField(upload_to='media', blank=True)
 
     def get_absolute_url(self):

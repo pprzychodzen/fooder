@@ -65,11 +65,11 @@
         <div class="col">
             <h3><strong>Opis:</strong></h3>
 
-            {{ recipe.description }}
+            {{ recipe.description|safe }}
             <hr>
             <h3><strong>Przygotowanie:</strong></h3>
 
-            {{ recipe.preparing }}
+            {{ recipe.preparing|safe }}
         </div>
     </div>
 </div>

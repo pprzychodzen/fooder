@@ -38,11 +38,12 @@ class MyAuthenticationForm(AuthenticationForm):
 
 
 class UserProfileForm(forms.ModelForm):
+    avatar = forms.ImageField(widget=forms.FileInput, label='')
+    about_me = forms.CharField(widget=forms.Textarea(attrs={"rows": 5, "cols": 20}), label="Napisz coś więcej o sobie")
+
     class Meta:
         model = UserProfile
         fields = ('avatar', 'about_me')
-        labels = {'avatar': 'Avatar',
-                  'about_me': 'Więcej o mnie'}
 
 
 class ChangePassword(PasswordChangeForm):

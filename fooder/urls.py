@@ -18,7 +18,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from main.views import RecipeListView, RecipeDetail, RecipeCreateView
+from main.views import RecipeListView, RecipeDetail, RecipeCreateView, RecipeSearchList
 from user.views import login_request, logout_request, signup, UserProfileView, change_password
 
 urlpatterns = [
@@ -35,6 +35,7 @@ urlpatterns = [
     path('', RecipeListView.as_view(), name='homepage'),
     path('<int:pk>/', RecipeDetail.as_view(), name='recipe_detail'),
     path('create/', RecipeCreateView.as_view(), name='create_recipe'),
+    path('search/', RecipeSearchList.as_view(), name='search'),
 
 ]
 
