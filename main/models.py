@@ -33,6 +33,13 @@ class Serving(models.Model):
         return self.name
 
 
+class IngredientsType(models.Model):
+    type = models.CharField(max_length=60, blank=True)
+
+    def __str__(self):
+        return self.type
+
+
 class Ingredients(models.Model):
     name = models.CharField(max_length=60)
 
@@ -50,7 +57,7 @@ class Recipe(models.Model):
     ingredients = models.ManyToManyField(Ingredients, blank=True, related_name='recipe_ingredients')
     sauce = models.ManyToManyField(Sauce, blank=True, related_name='recipe_sauce')
     serving = models.ManyToManyField(Serving, blank=True, related_name='recipe_serving')
-
+    ingredients_type = models.ManyToManyField(IngredientsType, related_name='ingredients_type', blank=True)
     image = models.ImageField(upload_to='media', blank=True)
 
     def get_absolute_url(self):
