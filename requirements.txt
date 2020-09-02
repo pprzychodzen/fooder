@@ -3,3 +3,4 @@ django-tinymce4-lite
 django-bootstrap4==1.0.1
 django-crispy-forms==1.8.1
 django-filter==2.2.0
+Pillowpip
