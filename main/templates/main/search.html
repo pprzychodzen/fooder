@@ -2,13 +2,19 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<form method="POST" action="">
+
+<form method="GET">
+    {{ filter.form|crispy }}
     {% csrf_token %}
-    {% for ingredients in ingredients_type %}
-        <input type="checkbox" id="{{ingredients.type}}" value="1">
-        <label for="{{ingredients.type}}">{{ingredients.type}}</label>
-    {% endfor %}
+
 
     <button type="submit" name="save" value="save">szukaj</button>
 </form>
+<ul>
+{% for ingredients in ingredients_type %}
+    <li>
+        <a href="{url 'recipe_detail' recipe.id %}">{{ recipe.title }}</a>
+    </li>
+    </ul>
+    {% endfor %}
 {%endblock%}
