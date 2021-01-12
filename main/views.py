@@ -3,7 +3,6 @@ from django.urls import reverse
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, FormMixin
 from django.db.models import Q
-
 from main.forms import RecipeCreateForm, CommentForm
 from main.models import Recipe, Comment, IngredientsType
 from main.filters import RecipeFilter
@@ -20,14 +19,14 @@ from main.filters import RecipeFilter
 
 
 class RecipeSearch(ListView):
-    model = IngredientsType
+    model = Recipe
     template_name = "main/search.html"
     context_object_name = 'ingredients_type'
-    queryset = IngredientsType.objects.all()
+    recipe = Recipe.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['filter'] = RecipeFilter(self.request.GET, queryset=IngredientsType.objects.all())
+        context['filter'] = RecipeFilter(self.request.GET, queryset=Recipe.objects.all())
         return context
 
 

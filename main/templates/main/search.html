@@ -3,18 +3,27 @@
 
 {% block content %}
 
-<form method="GET">
-    {{ filter.form|crispy }}
-    {% csrf_token %}
+<!--<form method="GET">-->
+<!--    {{ filter.form|crispy }}-->
+<!--    {% csrf_token %}-->
 
 
-    <button type="submit" name="save" value="save">szukaj</button>
-</form>
+<!--    <button type="submit" name="save" value="save">szukaj</button>-->
+<!--</form>-->
+{% for recipe in object_list %}
+
 <ul>
-{% for ingredients in ingredients_type %}
-    <li>
-        <a href="{url 'recipe_detail' recipe.id %}">{{ recipe.title }}</a>
-    </li>
-    </ul>
-    {% endfor %}
+                            {% for ingredientstype in recipe.ingredients_type.all %}
+                            {{ingredientstype.type}},{% endfor %}
+
+</ul>
+
+{% endfor %}
+<!--<ul>-->
+<!--{% for ingredients in recipe.ingredients.all %}-->
+<!--    <li>-->
+<!--        <a href="{url 'recipe_detail' recipe.id %}">{{ ingredient.name }}</a>-->
+<!--    </li>-->
+<!--    </ul>-->
+<!--    {% endfor %}-->
 {%endblock%}

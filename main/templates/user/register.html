@@ -1,11 +1,16 @@
 {% extends "main/header.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v9.0&appId=1164372480649262&autoLogAppEvents=1"
+        nonce="xLtu4YI1"></script>
 <style>
     .asteriskField {
     display: none;
 }
+
+
 
 
 
@@ -15,15 +20,18 @@
     <div class="col-6">
         <div class="card">
             <div class="card-body">
-                <h2>rejestracja</h2>
+                <h3>rejestracja</h3>
                 <form method="post">
                     {% csrf_token %}
                     {{ form|crispy}}
                     <button type="submit" class="btn btn-secondary">zarejestruj</button>
 
                 </form>
-                Jeżeli masz już konto, <a href="{% url 'login' %}" class="link"><strong>zaloguj się</strong></a>.
 
+                Jeżeli masz już konto, <a href="{% url 'login' %}" class="link"><strong>zaloguj się</strong></a>.
+                <hr>
+                <div class="fb-login-button" data-width="" data-size="medium" data-button-type="login_with"
+                     data-layout="rounded" data-auto-logout-link="false" data-use-continue-as="false"></div>
             </div>
         </div>
     </div>

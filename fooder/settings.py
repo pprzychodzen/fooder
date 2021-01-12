@@ -57,8 +57,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'contextmenu': 'formats | link image',
     'menubar': True,
     'statusbar': True,
-    }
-
+}
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -73,6 +72,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'crispy_forms',
     'django_filters',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -83,6 +83,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'fooder.urls'
@@ -98,12 +100,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
-
-
 
 WSGI_APPLICATION = 'fooder.wsgi.application'
 
@@ -135,6 +138,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -155,10 +163,8 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(NEW_BASE_DIR, '')
 
-
 TINYMCE_JS_URL = '//cdn.tinymce.com/4/tinymce.min.js'
 TINYMCE_JS_ROOT = os.path.join(STATIC_URL, "js/tinymce")
-
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -166,4 +172,7 @@ MESSAGE_TAGS = {message_constants.DEBUG: 'debug',
                 message_constants.INFO: 'info',
                 message_constants.SUCCESS: 'success',
                 message_constants.WARNING: 'warning',
-                message_constants.ERROR: 'danger',}
+                message_constants.ERROR: 'danger', }
+
+SOCIAL_AUTH_FACEBOOK_KEY = '1164372480649262'
+SOCIAL_AUTH_FACEBOOK_SECRET = '3c0b09a51431ad200fd3901f787ff3e2'

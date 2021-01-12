@@ -30,7 +30,7 @@ urlpatterns = [
     path('register/', signup, name='register'),
     path('user_profile/<int:pk>/', UserProfileView.as_view(), name='user_profile'),
     path('password/', change_password, name='change_password'),
-
+    path('oauth/', include('social_django.urls', namespace='social')),
     # main
     path('', RecipeListView.as_view(), name='homepage'),
     path('<int:pk>/', RecipeDetail.as_view(), name='recipe_detail'),
